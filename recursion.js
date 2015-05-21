@@ -57,41 +57,38 @@ var arr = [1,2,3,7,8,9];
 // console.log(bSearch(arr,7));
 
 var makeChange = function(amount, coins){
+  var numCoins, change, i, thisChange, bestChange, testChange;
   var maxCoin = coins[0];
 
-  if(amount % maxCoin === 0){
-    var numCoins = amount / maxCoin;
-    var change = [];
-    for (var i = 0; i < numCoins; i++){
+  if (amount % maxCoin === 0) {
+    numCoins = amount / maxCoin;
+    change = [];
+    for (i = 0; i < numCoins; i++) {
       change.push(maxCoin);
     }
     return change;
-  }else if(amount < maxCoin){
+  } else if (amount < maxCoin){
     return makeChange(amount, coins.slice(1, coins.length));
   }
-  var numCoins = Math.floor(amount / maxCoin);
+  numCoins = Math.floor(amount / maxCoin);
 
-  // var change = [];
-  // for (var i = 0; i < numCoins; i++){
-  //   change.push(maxCoin);
-  // }
+  thisChange = makeChange(amount - (maxCoin), coins);
+  thisChange.push(maxCoin);
 
-  var bestChange = makeChange(amount-(maxCoin), coins);
-  bestChange.push(maxCoin);
-  
-  // for(var i = 1; i < coins.length; i++){
-  //   if (coins[i] < amount){
-  //     var thisChange = makeChange(amount - coins[i], coins).push(coins[i]);
-  //     if (thisChange.length < bestChange.length){
-  //       bestChange = thisChange;
-  //     }
-  //   }
-  // }
+  bestChange = thisChange;
+
+  for (i = 1; i < coins.length; i++) {
+    if (coins[i] < amount) {
+      testChange = makeChange(amount - coins[i], coins);
+      testChange.push(coins[i]);
+      if (testChange.length < bestChange.length) {
+        bestChange = testChange;
+      }
+    }
+  }
 
   return bestChange;
 
-  // var bestChange = makeChange(amount-, coins).push(maxCoin);
-
 };
 
-console.log(makeChange(14,[10,7,1]));
+console.log(makeChange(11,[10,7,1]));
