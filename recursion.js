@@ -71,24 +71,14 @@ var makeChange = function(amount, coins){
   }
   var numCoins = Math.floor(amount / maxCoin);
 
-  var change = [];
-  for (var i = 0; i < numCoins; i++){
-    change.push(maxCoin);
-  }
+  // var change = [];
+  // for (var i = 0; i < numCoins; i++){
+  //   change.push(maxCoin);
+  // }
 
-  return makeChange(amount-(numCoins * maxCoin), coins.slice(1,coins.length)).concat(change);
-
-  // var bestChange = makeChange(amount-, coins).push(maxCoin);
-
-};
-
-console.log(makeChange(41,[10,7,1]));
-
-
-
-
-
-
+  var bestChange = makeChange(amount-(maxCoin), coins);
+  bestChange.push(maxCoin);
+  
   // for(var i = 1; i < coins.length; i++){
   //   if (coins[i] < amount){
   //     var thisChange = makeChange(amount - coins[i], coins).push(coins[i]);
@@ -97,3 +87,11 @@ console.log(makeChange(41,[10,7,1]));
   //     }
   //   }
   // }
+
+  return bestChange;
+
+  // var bestChange = makeChange(amount-, coins).push(maxCoin);
+
+};
+
+console.log(makeChange(14,[10,7,1]));
