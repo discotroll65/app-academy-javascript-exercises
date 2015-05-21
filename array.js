@@ -91,9 +91,41 @@ Array.prototype.myInject = function(cb){
   return memo;
 };
 
-var arr = [1,2,3];
-var sum = arr.myInject(function(memo, element){
-  return memo + element;
-});
+// var arr = [1,2,3];
+// var sum = arr.myInject(function(memo, element){
+//   return memo + element;
+// });
+//
+// console.log(sum);
 
-console.log(sum);
+Array.prototype.bubbleSort = function(){
+  var sorted = false;
+  while (sorted === false){
+    sorted = true;
+    for (var i = 0; i < this.length - 1; i++){
+      if (this[i] > this[i+1]){
+        sorted = false;
+        var temp = this[i+1];
+        this[i+1] = this[i];
+        this[i] = temp;
+      }
+    }
+  }
+  return this;
+};
+
+// arr = [5,3,6,2,1];
+// console.log(arr.bubbleSort());
+
+String.prototype.substrings = function(){
+  var array = [];
+
+  for(var i = 0; i < this.length - 1; i++ ){
+    for(var j= i + 1; j <= this.length; j++){
+      array.push(this.substring(i, j));
+    }
+  }
+  return array;
+};
+
+// console.log("cat".substrings());
