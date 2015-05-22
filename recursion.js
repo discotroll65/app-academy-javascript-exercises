@@ -59,13 +59,16 @@ var arr = [1,2,3,7,8,9];
 var makeChange = function(amount, coins, changeHistory){
   var numCoins, change, i, thisChange, bestChange, testChange, remainder;
   var maxCoin = coins[0];
-
+    // if(amount === 1 && changeHistory[amount]){
+    //  debugger
+    // }
   if (amount % maxCoin === 0) {
     numCoins = amount / maxCoin;
     change = [];
     for (i = 0; i < numCoins; i++) {
       change.push(maxCoin);
     }
+    changeHistory[amount] = change
     return change;
   } else if (amount < maxCoin){
     return makeChange(amount, coins.slice(1, coins.length), changeHistory);
@@ -73,30 +76,45 @@ var makeChange = function(amount, coins, changeHistory){
   numCoins = Math.floor(amount / maxCoin);
 
   remainder = amount - (maxCoin);
-  if (!changeHistory.remainder ){
+  if (!changeHistory[remainder] ){
     thisChange = makeChange(remainder, coins, changeHistory);
-    changeHistory.remainder = thisChange;
+    changeHistory[remainder] = thisChange;
+  }else{
+    thisChange = changeHistory[remainder];
   }
-  thisChange.push(maxCoin);
 
+  thisChange.push(maxCoin);
+    if(remainder === 5){
+     //debugger
+    }
   bestChange = thisChange;
 
   for (i = 1; i < coins.length; i++) {
     if (coins[i] < amount) {
-      testChange = makeChange(amount - coins[i], coins, changeHistory);
+
+      remainder = amount - (coins[i]);
+      if (!changeHistory[remainder] ){
+        testChange = makeChange(remainder, coins, changeHistory);
+        changeHistory[remainder] = testChange;
+      }else{
+        testChange = changeHistory[remainder];
+      }
       testChange.push(coins[i]);
 
       if (testChange.length < bestChange.length) {
+      //  debugger
         bestChange = testChange;
       }
     }
   }
 
+
+  changeHistory[amount] = bestChange;
   return bestChange;
 
 };
 
-// console.log(makeChange(11,[10,7,1]));
+ console.log(makeChange(5,[10,7,1], {}));
 
 
 
@@ -152,14 +170,14 @@ Array.prototype.subsets = function(){
   return subsetsArray;
 };
 
-var subsets = [1,2,3].subsets();
-subsets.forEach(function(element){
-  console.log("[");
-  element.forEach(function(innerEl){
-    console.log(innerEl);
-  });
-  console.log("]");
-});
+// var subsets = [1,2,3].subsets();
+// subsets.forEach(function(element){
+//   console.log("[");
+//   element.forEach(function(innerEl){
+//     console.log(innerEl);
+//   });
+//   console.log("]");
+// });
 
 
 
