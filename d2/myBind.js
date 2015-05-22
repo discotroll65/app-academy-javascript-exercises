@@ -2,7 +2,7 @@ Function.prototype.myBind = function(object) {
   var fn = this;
 
   return function () {
-    fn.apply(object);
+    return fn.apply(object);
   };
 };
 
