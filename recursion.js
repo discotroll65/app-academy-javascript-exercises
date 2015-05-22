@@ -56,8 +56,8 @@ var bSearch = function(arr, target){
 var arr = [1,2,3,7,8,9];
 // console.log(bSearch(arr,7));
 
-var makeChange = function(amount, coins){
-  var numCoins, change, i, thisChange, bestChange, testChange;
+var makeChange = function(amount, coins, changeHistory){
+  var numCoins, change, i, thisChange, bestChange, testChange, remainder;
   var maxCoin = coins[0];
 
   if (amount % maxCoin === 0) {
@@ -68,19 +68,24 @@ var makeChange = function(amount, coins){
     }
     return change;
   } else if (amount < maxCoin){
-    return makeChange(amount, coins.slice(1, coins.length));
+    return makeChange(amount, coins.slice(1, coins.length), changeHistory);
   }
   numCoins = Math.floor(amount / maxCoin);
 
-  thisChange = makeChange(amount - (maxCoin), coins);
+  remainder = amount - (maxCoin);
+  if (!changeHistory.remainder ){
+    thisChange = makeChange(remainder, coins, changeHistory);
+    changeHistory.remainder = thisChange;
+  }
   thisChange.push(maxCoin);
 
   bestChange = thisChange;
 
   for (i = 1; i < coins.length; i++) {
     if (coins[i] < amount) {
-      testChange = makeChange(amount - coins[i], coins);
+      testChange = makeChange(amount - coins[i], coins, changeHistory);
       testChange.push(coins[i]);
+
       if (testChange.length < bestChange.length) {
         bestChange = testChange;
       }
