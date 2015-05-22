@@ -59,9 +59,6 @@ var arr = [1,2,3,7,8,9];
 var makeChange = function(amount, coins, changeHistory){
   var numCoins, change, i, thisChange, bestChange, testChange, remainder;
   var maxCoin = coins[0];
-    // if(amount === 1 && changeHistory[amount]){
-    //  debugger
-    // }
   if (amount % maxCoin === 0) {
     numCoins = amount / maxCoin;
     change = [];
@@ -78,15 +75,13 @@ var makeChange = function(amount, coins, changeHistory){
   remainder = amount - (maxCoin);
   if (!changeHistory[remainder] ){
     thisChange = makeChange(remainder, coins, changeHistory);
-    changeHistory[remainder] = thisChange;
+    changeHistory[remainder] = thisChange.slice(0);
   }else{
     thisChange = changeHistory[remainder];
   }
 
+
   thisChange.push(maxCoin);
-    if(remainder === 5){
-     //debugger
-    }
   bestChange = thisChange;
 
   for (i = 1; i < coins.length; i++) {
@@ -95,14 +90,13 @@ var makeChange = function(amount, coins, changeHistory){
       remainder = amount - (coins[i]);
       if (!changeHistory[remainder] ){
         testChange = makeChange(remainder, coins, changeHistory);
-        changeHistory[remainder] = testChange;
+        changeHistory[remainder] = testChange.slice(0);
       }else{
         testChange = changeHistory[remainder];
       }
       testChange.push(coins[i]);
 
       if (testChange.length < bestChange.length) {
-      //  debugger
         bestChange = testChange;
       }
     }
@@ -114,7 +108,7 @@ var makeChange = function(amount, coins, changeHistory){
 
 };
 
- console.log(makeChange(5,[10,7,1], {}));
+ console.log(makeChange(242,[7,3,1], {}));
 
 
 
