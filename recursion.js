@@ -91,4 +91,74 @@ var makeChange = function(amount, coins){
 
 };
 
-console.log(makeChange(11,[10,7,1]));
+// console.log(makeChange(11,[10,7,1]));
+
+
+
+Array.prototype.mergeSort = function(){
+  var midPoint, leftHalf, rightHalf;
+
+  if (this.length === 1) {
+    return this;
+  }
+
+  midPoint = Math.floor(this.length / 2);
+  leftHalf = this.slice(0, midPoint);
+  rightHalf = this.slice(midPoint, this.length);
+  return this.mergeFunction(leftHalf.mergeSort(), rightHalf.mergeSort());
+};
+
+Array.prototype.mergeFunction = function(left, right) {
+  var mergedArray = [];
+  while (left.length > 0 && right.length > 0) {
+    if (left[0] > right[0]) {
+      mergedArray.push(right.shift());
+    }else if (left[0] < right[0]){
+      mergedArray.push(left.shift());
+    }else{
+      mergedArray.push(left.shift());
+      mergedArray.push(right.shift());
+    }
+  }
+  mergedArray = mergedArray.concat(left);
+  mergedArray = mergedArray.concat(right);
+
+  return mergedArray;
+};
+
+// console.log([2,1,3,4,2].mergeSort());
+
+Array.prototype.subsets = function(){
+  if (this.length === 0) {
+    return [[]];
+  }
+  var lastElement, subsetsArray, poppedArray, nextSubsetEl;
+
+  lastElement = this.slice(-1)[0];
+  poppedArray = this.slice(0, this.length - 1);
+  subsetsArray = poppedArray.subsets();
+
+  subsetsArray.forEach(function(element){
+    nextSubsetEl = element.slice(0);
+    nextSubsetEl.push(lastElement);
+    subsetsArray[subsetsArray.length] = nextSubsetEl;
+  });
+
+  return subsetsArray;
+};
+
+var subsets = [1,2,3].subsets();
+subsets.forEach(function(element){
+  console.log("[");
+  element.forEach(function(innerEl){
+    console.log(innerEl);
+  });
+  console.log("]");
+});
+
+
+
+
+
+
+//
