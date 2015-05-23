@@ -6,6 +6,13 @@ function Board() {
   ];
 }
 
+Board.prototype.print = function(){
+  var boardString = "\n";
+  this.grid.forEach(function(row){
+    boardString += JSON.stringify(row) + "\n" ;
+  });
+  console.log(boardString);
+};
 
 Board.prototype.isWon = function(marker){
   var winCondition = [marker, marker, marker];
@@ -25,6 +32,25 @@ Board.prototype.isWon = function(marker){
   var diag2Check = this.rowEquals(winCondition, diag2);
 
   return rowCheck || colCheck || diag1Check || diag2Check;
+};
+
+Board.prototype.moveValid = function(moveArray){
+  var row = moveArray[0];
+  var col = moveArray[1];
+  if (this.grid[row][col]) {
+    return false;
+  }
+  return true;
+};
+
+Board.prototype.makeMove = function(moveArray, marker){
+  var row = moveArray[0];
+  var col = moveArray[1];
+  if (this.moveValid(moveArray)) {
+    this.grid[row][col] = marker;
+    return true;
+  }
+  return false;
 };
 
 
@@ -53,4 +79,4 @@ Board.prototype.transposeGrid = function(){
   });
   return newGrid;
 };
-// module.exports = Board;
+module.exports = Board;
