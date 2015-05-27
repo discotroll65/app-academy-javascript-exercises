@@ -1,0 +1,14 @@
+.cell {
+  float: left;
+  border: 5px solid black;
+  background: grey;
+  height: 150px;
+  width: 150px;
+}
+
+.cell:hover {
+  background: yellow;
+}
+.row {
+  clear: both;
+}
