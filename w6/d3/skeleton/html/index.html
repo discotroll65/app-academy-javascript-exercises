@@ -11,11 +11,14 @@
     <script src="../../ttt-core-solution/ttt-core.js"></script>
     <script src="../js/ttt-view.js"></script>
 
+    <p>Tic Tac Toe</p>
     <content class="container group"></content>
+    <p class="end-message"></p>
+
 
     <script type="text/javascript">
       var $container = $(".container");
-      var View = new TTT.View(new TTT.Game(), $container);
+      var view = new TTT.View(new TTT.Game(), $container);
     </script>
   </body>
 </html>

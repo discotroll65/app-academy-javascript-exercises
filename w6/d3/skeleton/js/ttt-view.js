@@ -15,12 +15,11 @@
     var that = this;
     $('.square').on('click', function(event){
       var $square = $(event.currentTarget);
-      try{
+      try {
         $square.data("mark", game.currentPlayer);
         game.playMove($square.data("pos"));
         that.makeMove($square);
-      }
-      catch (error) {
+      } catch (error) {
         if (error instanceof TTT.MoveError){
           alert(error.msg);
         } else {
@@ -33,7 +32,21 @@
   View.prototype.makeMove = function ($square) {
     var mark = $square.data("mark");
     var game = this.game;
+    var endMessage;
     $square.removeClass("unplayed").addClass("played " + mark).append(mark);
+    if (game.isOver()) {
+      $('.square').off('click');
+      if (game.winner()){
+        var winnerMark = game.winner();
+        $('.' + winnerMark).addClass('winner');
+
+        endMessage = winnerMark + " has won!";
+      } else {
+        endMessage = "Nobody has won!";
+      }
+      $('.end-message').append(endMessage);
+      $('.unplayed').removeClass('unplayed').addClass('played');
+    }
   };
 
   View.prototype.setupBoard = function () {
