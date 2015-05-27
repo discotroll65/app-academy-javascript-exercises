@@ -8,6 +8,7 @@
     this.$gameContainer = $el;
     this.setupBoard();
     this.bindEvents();
+    this.currentPlayer = game.currentPlayer;
   };
 
   View.prototype.bindEvents = function () {
@@ -16,7 +17,6 @@
     $('.square').on('click', function(event){
       var $square = $(event.currentTarget);
       try {
-        $square.data("mark", game.currentPlayer);
         game.playMove($square.data("pos"));
         that.makeMove($square);
       } catch (error) {
@@ -30,10 +30,12 @@
   };
 
   View.prototype.makeMove = function ($square) {
-    var mark = $square.data("mark");
+    var mark = this.currentPlayer;
     var game = this.game;
     var endMessage;
     $square.removeClass("unplayed").addClass("played " + mark).append(mark);
+
+    this.currentPlayer = game.currentPlayer;
     if (game.isOver()) {
       $('.square').off('click');
       if (game.winner()){
