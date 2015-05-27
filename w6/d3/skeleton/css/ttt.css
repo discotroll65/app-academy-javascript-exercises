@@ -1,4 +1,4 @@
-.cell {
+.square {
   float: left;
   border: 5px solid black;
   background: grey;
@@ -6,9 +6,31 @@
   width: 150px;
 }
 
-.cell:hover {
+.square:hover {
   background: yellow;
 }
 .row {
+  clear: both;
+}
+
+.x {
+  background: white;
+  color: blue;
+  font-size: 114px;
+  text-align: center;
+  font-family: 'helvetica';
+}
+
+.o {
+  background: white;
+  color: purple;
+  font-size: 114px;
+  text-align: center;
+  font-family: 'helvetica';
+}
+
+.group::after {
+  content: "";
+  display: block;
   clear: both;
 }
