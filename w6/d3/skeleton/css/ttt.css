@@ -1,12 +1,24 @@
 .square {
   float: left;
   border: 5px solid black;
-  background: grey;
   height: 150px;
   width: 150px;
 }
 
-.square:hover {
+.unplayed {
+  background: grey;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 480px;
+  border: solid 5px;
+
+}
+
+.unplayed:hover {
   background: yellow;
 }
 .row {
@@ -27,6 +39,14 @@
   font-size: 114px;
   text-align: center;
   font-family: 'helvetica';
+}
+
+.winner.played {
+  background: teal;
+}
+
+.played {
+  background: white;
 }
 
 .group::after {

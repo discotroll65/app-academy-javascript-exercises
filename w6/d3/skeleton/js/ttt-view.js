@@ -32,7 +32,8 @@
 
   View.prototype.makeMove = function ($square) {
     var mark = $square.data("mark");
-    $square.addClass(mark).append(mark);
+    var game = this.game;
+    $square.removeClass("unplayed").addClass("played " + mark).append(mark);
   };
 
   View.prototype.setupBoard = function () {
@@ -41,7 +42,7 @@
       $('<div>').addClass('row').appendTo($container);
       for (var j = 0; j < 3; j++){
         var $lastRow = $container.children().last();
-        $('<div>').addClass('square').appendTo($lastRow);
+        $('<div>').addClass('square unplayed').appendTo($lastRow);
         var $square = $lastRow.children().last();
         $square.data("pos", [i,j]);
       }
