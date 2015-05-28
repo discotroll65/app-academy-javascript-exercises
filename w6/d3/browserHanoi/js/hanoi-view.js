@@ -43,8 +43,23 @@
         that.$startTower = null;
         that.$endTower = null;
       }
+      that.checkWin();
     });
   };
+
+  View.prototype.checkWin = function() {
+    var that = this;
+    var game = that.game;
+    if (game.isWon()) {
+      $('.tower').off('click');
+      var $firstTwoDiscs = $.merge( $('.small') , $('.medium') );
+      var $winningDiscs = $.merge( $firstTwoDiscs ,  $('.large') );
+
+      $winningDiscs.addClass('won');
+
+      alert("You win!");
+    }
+  }
 
   View.prototype.makeMove = function($startTower, $endTower){
     console.log("i'm making a move");
