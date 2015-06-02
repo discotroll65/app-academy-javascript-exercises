@@ -15,6 +15,7 @@ Pokedex.Views.PokemonIndex = Backbone.View.extend({
   },
 
   refreshPokemon: function (options) {
+    this.collection.fetch(options)
   },
 
   render: function () {
@@ -24,14 +25,9 @@ Pokedex.Views.PokemonIndex = Backbone.View.extend({
 
   selectPokemonFromList: function (event) {
     var $target = $(event.currentTarget);
-    var pokemon = this.collection.get($target.data("id"));
+    Backbone.history.navigate('pokemon/' + $target.data('id'), {trigger: true});
 
-    var pokemonDetail = new Pokedex.Views.PokemonDetail({
-      model: pokemon
-    });
 
-    $("#pokedex .pokemon-detail").html(pokemonDetail.$el);
-    pokemonDetail.refreshPokemon();
   }
 });
 
@@ -63,11 +59,19 @@ Pokedex.Views.PokemonDetail = Backbone.View.extend({
 
   selectToyFromList: function (event) {
     var $target = $(event.currentTarget);
-    var toyId = $target.data('id');
-    var toy = this.model.toys().get(toyId);
-    var toyDetail = new Pokedex.Views.ToyDetail({ model: toy });
+    var pokemonId = $target.data("pokemon-id");
+    var toyId = $target.data("id");
+    Backbone.history.navigate(
+      'pokemon/' + pokemonId + '/toys/' + toyId,
+      { trigger: true }
+    );
 
-    $('#pokedex .toy-detail').append(toyDetail.render().$el);
+
+    // var toyId = $target.data('id');
+    // var toy = this.model.toys().get(toyId);
+    // var toyDetail = new Pokedex.Views.ToyDetail({ model: toy });
+    //
+    // $('#pokedex .toy-detail').append(toyDetail.render().$el);
   }
 });
 
@@ -80,15 +84,4 @@ Pokedex.Views.ToyDetail = Backbone.View.extend({
     this.$el.html(toyDetail);
     return this;
   }
-});
-
-$(function () {
-  var pokes = new Pokedex.Collections.Pokemon();
-
-  var pokemonIndex = new Pokedex.Views.PokemonIndex({
-    collection: pokes
-  });
-  pokes.fetch();
-  // pokemonIndex.refreshPokemon();
-  $("#pokedex .pokemon-list").html(pokemonIndex.$el);
 });
