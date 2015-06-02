@@ -1,4 +1,12 @@
 Pokedex.RootView.prototype.renderPokemonDetail = function (pokemon) {
+  var that = this;
+  pokemon.fetch({
+    success: function() {
+      pokemon.toys().each(function(toy){
+        that.addToyToList(toy);
+      });
+    }
+  });
   var pokeEntry = $('<div>').addClass('detail');
   var movesTitle = $('<h2>').append("Moves");
   var movesList = $('<ul>');
@@ -21,6 +29,8 @@ Pokedex.RootView.prototype.renderPokemonDetail = function (pokemon) {
       pokeEntry.append($('<br>'));
     }
   }
+
+  pokeEntry.append($('<ul>').addClass('toys'))
 
   this.$pokeDetail.html(pokeEntry);
 };
