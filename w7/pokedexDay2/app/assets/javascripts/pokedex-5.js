@@ -39,7 +39,10 @@ Pokedex.Views.PokemonDetail = Backbone.View.extend({
   refreshPokemon: function (options) {
     var view = this;
     view.model.fetch({
-      success: view.render.bind(view)
+      success: function () {
+        view.render();
+        options.success && options.success();
+      }
     });
   },
 

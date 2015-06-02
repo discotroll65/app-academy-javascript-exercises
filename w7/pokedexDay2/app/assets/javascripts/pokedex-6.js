@@ -18,7 +18,7 @@ Pokedex.Router = Backbone.Router.extend({
       });
 
       $("#pokedex .pokemon-detail").html(pokemonDetail.$el);
-      pokemonDetail.refreshPokemon(callback);
+      pokemonDetail.refreshPokemon({success: callback} );
       this._pokemonDetail = pokemonDetail;
     }
   },
