@@ -49,11 +49,11 @@ Pokedex.Views.PokemonDetail = Backbone.View.extend({
   render: function () {
     var view = this;
     view.$el.empty();
-    var pokemonDetail = JST['pokemonDetail']({pokemon: view.model});
+    var pokemonDetail = JST['pokemonDetail']({ pokemon: view.model });
     view.$el.html(pokemonDetail);
 
     view.model.toys().each(function (toy){
-      var toyListItem = JST['toyListItem']({  toy: toy });
+      var toyListItem = JST['toyListItem']({ toy: toy });
       view.$el.find('ul.toys').append(toyListItem);
     });
 
@@ -85,6 +85,7 @@ Pokedex.Views.ToyDetail = Backbone.View.extend({
       pokes: new Pokedex.Collections.Pokemon()
     });
     this.$el.html(toyDetail);
+
     return this;
   }
 });
