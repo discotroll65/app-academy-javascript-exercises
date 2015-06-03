@@ -30,6 +30,10 @@ Pokedex.Views.PokemonIndex = Backbone.View.extend({
 });
 
 Pokedex.Views.PokemonDetail = Backbone.View.extend({
+  initialize: function () {
+    this.listenTo(this.model.toys(), 'sync', this.refreshPokemon)
+  },
+
   events: {
     'click .toys li': 'selectToyFromList'
   },
@@ -68,24 +72,27 @@ Pokedex.Views.PokemonDetail = Backbone.View.extend({
       'pokemon/' + pokemonId + '/toys/' + toyId,
       { trigger: true }
     );
-
-
-    // var toyId = $target.data('id');
-    // var toy = this.model.toys().get(toyId);
-    // var toyDetail = new Pokedex.Views.ToyDetail({ model: toy });
-    //
-    // $('#pokedex .toy-detail').append(toyDetail.render().$el);
   }
 });
 
 Pokedex.Views.ToyDetail = Backbone.View.extend({
+  events: {
+    'change select': 'changeOwner'
+  },
+
   render: function () {
     var toyDetail = JST["toyDetail"]({
       toy: this.model,
-      pokes: new Pokedex.Collections.Pokemon()
+      pokes: this.collection
     });
     this.$el.html(toyDetail);
 
     return this;
+  },
+
+  changeOwner: function (event) {
+    var $target = $(event.target);
+    var newPokemonId = $target.val();
+    this.model.save({ pokemon_id: newPokemonId });
   }
 });
