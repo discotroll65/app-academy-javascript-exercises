@@ -10,8 +10,6 @@ JournalApp.Views.PostsIndex = Backbone.View.extend({
     var content = this.template();
     this.$el.html(content);
     posts.each(function(post) {
-      // var $li = $('<li>').text(post.escape('title'));
-      // this.$el.append($li);
       var postItemView = new JournalApp.Views.PostsIndexItem({
         model: post
       });
