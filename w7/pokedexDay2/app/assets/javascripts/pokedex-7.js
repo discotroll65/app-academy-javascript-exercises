@@ -18,10 +18,9 @@ Pokedex.Views.PokemonForm = Backbone.View.extend({
     view.model.save(pokeAttrs, {
       success: function () {
         view.collection.add(view.model);
+        view.collection.trigger("addByForm");
         Backbone.history.navigate('pokemon/' + view.model.id, { trigger: true });
       }
     });
-
-
   }
 });
