@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params[:post])
+    @post = Post.new(post_params)
     if @post.save
       render json: @post
     else
@@ -16,5 +16,10 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     render json: @post
+  end
+
+  private
+  def post_params
+    params.require(:post).permit(:body, :title)
   end
 end
