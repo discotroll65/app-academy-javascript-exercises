@@ -9,7 +9,11 @@ JournalApp.Views.PostForm = Backbone.View.extend({
   },
 
   render: function() {
-    var content = this.template({ post: this.model });
+    var options = { post: this.model };
+    var buttonMessage = (options.post.id) ? "Update Post" : "Create Post";
+    _(options).extend({buttonMessage: buttonMessage});
+
+    var content = this.template(options);
     this.$el.html(content);
 
     return this;
@@ -22,8 +26,9 @@ JournalApp.Views.PostForm = Backbone.View.extend({
     var form = this;
 
     var post = this.model;
-    post.save( formData , {
+    post.save(formData, {
       success: function (){
+        form.collection.add(post);
         Backbone.history.navigate('#/posts/' + post.id, { trigger: true } );
       },
       error: function(model, resp, options) {
