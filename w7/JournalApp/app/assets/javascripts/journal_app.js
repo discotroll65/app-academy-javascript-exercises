@@ -5,9 +5,9 @@ window.JournalApp = {
   Routers: {},
   initialize: function() {
     var router = new JournalApp.Routers.Posts({
-      $rootEl: $('#main')
+      $main: $('#main')
     });
-    
+
     Backbone.history.start();
   }
 };

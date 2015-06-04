@@ -33,7 +33,8 @@ JournalApp.Views.PostForm = Backbone.View.extend({
       },
       error: function(model, resp, options) {
         form.$('content.errors').html(resp.responseText);
-      }
+      },
+      wait: true
     });
   }
 
