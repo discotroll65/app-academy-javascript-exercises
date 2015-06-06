@@ -8,12 +8,10 @@ TrelloClone.Routers.Router = Backbone.Router.extend({
 
   routes: {
     "": "boardsIndex",
-    'fack' : 'test'
+    'b' : 'boardsIndex'
   },
 
   boardsIndex: function(){
-    alert('hi');
-    console.log("indexing");
     var view = new TrelloClone.Views.BoardsIndex({
       collection: this.boards
     });
