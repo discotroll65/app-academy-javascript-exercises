@@ -20,11 +20,11 @@ TrelloClone.Views.BoardForm = Backbone.View.extend({
 
     board.save(attrs, {
       success: function( ){
+        Backbone.history.navigate("fack");
         form.collection.add(board);
       }
     });
 
-    Backbone.history.navigate("/fack", {trigger: true});
   }
 
 });

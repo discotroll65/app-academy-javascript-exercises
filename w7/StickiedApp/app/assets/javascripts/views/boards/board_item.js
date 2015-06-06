@@ -3,6 +3,10 @@ TrelloClone.Views.BoardItem = Backbone.View.extend({
     this.listenTo(this.model, "sync", this.render);
   },
 
+  events: {
+    "click .delete-board": "deleteBoard"
+  },
+
   tagName: 'li',
   className: 'board-item',
 
@@ -12,5 +16,12 @@ TrelloClone.Views.BoardItem = Backbone.View.extend({
     var content = this.template({board: this.model});
     this.$el.html(content);
     return this;
+  },
+
+  deleteBoard: function(){
+    this.remove();
+    this.model.destroy();
   }
+
+
 });
