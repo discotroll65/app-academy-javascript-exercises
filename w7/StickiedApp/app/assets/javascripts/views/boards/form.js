@@ -3,7 +3,7 @@ TrelloClone.Views.BoardForm = Backbone.View.extend({
   tagName: 'form',
   className: 'board-form',
   events:{
-    "submit button": "submit"
+    "submit": "submit"
   },
 
   render: function(){
@@ -21,9 +21,10 @@ TrelloClone.Views.BoardForm = Backbone.View.extend({
     board.save(attrs, {
       success: function( ){
         form.collection.add(board);
-        Backbone.history.navigate("#", {trigger: true});
       }
     });
+
+    Backbone.history.navigate("/fack", {trigger: true});
   }
 
 });
