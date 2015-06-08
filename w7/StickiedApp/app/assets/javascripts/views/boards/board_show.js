@@ -1,6 +1,8 @@
 TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
   template: JST['boards/show'],
 
+  className: 'board-show-container',
+
   initialize: function(){
     this.lists = this.model.lists();
     this.listenTo(this.model, 'sync', this.render);

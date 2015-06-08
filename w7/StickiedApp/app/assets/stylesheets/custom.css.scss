@@ -1,12 +1,18 @@
-li.board-item {
-  float: left;
+li {
   list-style-type: none;
+}
+
+li.board-item, li.list {
+  float: left;
   border: black 2px solid;
-  background: lightblue;
   margin: 0 10px;
   border-radius: 10px;
   height: 185px;
   width: 115px;
+}
+
+li.board-item {
+  background: lightblue;
 }
 
 li.board-item:hover{
@@ -23,10 +29,47 @@ div.new-board-block {
   width: 115px;
 }
 
+body {
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background: blue;
+  right: 0;
+}
+
+.board-show-container {
+  height: 100%;
+  background: blue;
+}
+
+.backdrop {
+  height: 100%;
+}
+
 .board-item-content {
   text-align: center;
   position: relative;
   height: 100%;
+}
+
+li.list {
+  background: #FFFFC9;
+  width: inherit;
+  padding: 5px;
+  height: inherit;
+}
+
+.card {
+  width: 100%;
+  border: black 2px solid;
+  margin: 10px 0;
+  border-radius: 10px;
+  background: #FFF;
+}
+
+ul.list-cards {
+  padding: 5px 10px;
 }
 
 #new-board-name {
@@ -37,4 +80,10 @@ div.new-board-block {
   position: absolute;
   margin: auto;
   bottom: 0;
+}
+
+.group:after {
+  content:"";
+  display: block;
+  clear: both;
 }
