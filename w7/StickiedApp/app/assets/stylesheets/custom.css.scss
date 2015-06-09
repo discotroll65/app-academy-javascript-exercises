@@ -1,3 +1,11 @@
+html, body, #main {
+  height: 100%;
+}
+
+h1 {
+  margin: 0;
+}
+
 ul {
   padding: 0px;
   margin: 0 auto;
@@ -58,7 +66,7 @@ nav.navbar {
 
 .board-show-container {
   height: 100%;
-  background: blue;
+  background: lightblue;
 }
 
 .backdrop {
