@@ -25,7 +25,6 @@ TrelloClone.Views.BoardItem = Backbone.View.extend({
   },
 
   deleteBoard: function(){
-    this.remove();
     this.model.destroy();
   }
 

@@ -3,14 +3,19 @@ TrelloClone.Views.BoardsIndex = Backbone.CompositeView.extend({
   template: JST['boards/index'],
 
   initialize: function(){
-    this.listenTo(this.collection, 'add', this.addBoardItemView);
     this.listenTo(this.collection, 'sync', this.render);
+    this.listenTo(this.collection, 'remove', this.removeBoardItemView);
+    this.listenTo(this.collection, 'add', this.addBoardItemView);
+
     this.collection.each(this.addBoardItemView.bind(this));
 
   },
 
+  className: 'index-div',
+
   events: {
-    "click div.new-board-block" : "checkFormClicked"
+    "click div.new-board-block" : "checkFormClicked",
+    "submit" : "killFormView"
   },
 
   addBoardItemView: function(board){
@@ -18,7 +23,11 @@ TrelloClone.Views.BoardsIndex = Backbone.CompositeView.extend({
       model: board
     });
 
-    this.addSubview('ul', view);
+    this.addSubview('span.boards', view);
+  },
+
+  removeBoardItemView: function(board){
+    this.removeModelSubview('span.boards', board);
   },
 
   checkFormClicked: function(event){
@@ -26,15 +35,22 @@ TrelloClone.Views.BoardsIndex = Backbone.CompositeView.extend({
       this._addForm = true;
     }
 
-    if (this._addForm ){
+    var formNotClicked = ($(event.target).attr("class") === 'new-board-block');
+
+    if (this._addForm && formNotClicked ){
       this.addBoardFormView();
       this._addForm = false;
-    } else if($(event.target).attr("class") === 'new-board-block') {
-      this.subviews('.new-board-block').each(
-        this.removeSubview.bind(this, '.new-board-block')
-      );
+    } else if(formNotClicked) {
+      this.killFormView.call(this);
       this._addForm = true;
     }
+  },
+
+  killFormView: function(){
+    this.subviews('.new-board-block').each(
+      this.removeSubview.bind(this, '.new-board-block')
+    );
+    this._addForm = true;
   },
 
   addBoardFormView: function(){

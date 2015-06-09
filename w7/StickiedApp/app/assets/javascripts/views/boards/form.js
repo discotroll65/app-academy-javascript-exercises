@@ -22,14 +22,6 @@ TrelloClone.Views.BoardForm = Backbone.View.extend({
     board.save(attrs, {
       success: function( ){
         form.collection.add(board);
-
-        indexUrl = (
-          Backbone.history.getFragment() === ""
-        ) ? "b" : "";
-
-        Backbone.history.navigate(
-          indexUrl, {trigger: true}
-        );
       }
     });
 

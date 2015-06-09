@@ -1,41 +1,59 @@
+ul {
+  padding: 0px;
+  margin: 0 auto;
+}
+
 li {
   list-style-type: none;
 }
 
-li.board-item, li.list {
+.board-item, .list {
   float: left;
   border: black 2px solid;
-  margin: 0 10px;
   border-radius: 10px;
   height: 185px;
   width: 115px;
+  margin: 10px
 }
 
-li.board-item {
+.board-item {
   background: lightblue;
 }
 
-li.board-item:hover{
+.board-item:hover{
   background: green;
 }
 
-div.new-board-block {
+nav.navbar {
+  margin-bottom: 0px;
+}
+
+.boards-index-title{
+  margin: 0 auto;
+  width: 150px;
+}
+
+.new-board-block-container {
   float: left;
   border: black 2px solid;
   background: lightgrey;
-  margin: 0 10px;
+  margin: 10px;
   border-radius: 10px;
   height: 185px;
   width: 115px;
-}
-
-body {
-  position: fixed;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  background: blue;
-  right: 0;
+  position: relative;
+  .new-board-block {
+    float: left;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    form {
+      position: absolute;
+      bottom: 20px;
+      margin: 0px 2px;
+    }
+  }
 }
 
 .board-show-container {
@@ -45,6 +63,12 @@ body {
 
 .backdrop {
   height: 100%;
+}
+
+.board-item-container{
+  height: 100%;
+  position: relative;
+  padding: 10px;
 }
 
 .board-item-content {
@@ -79,7 +103,7 @@ ul.list-cards {
 .delete-board {
   position: absolute;
   margin: auto;
-  bottom: 0;
+  bottom: 10px;
 }
 
 .group:after {
